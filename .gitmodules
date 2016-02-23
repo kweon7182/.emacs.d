@@ -1,0 +1,3 @@
+[submodule "annoying-arrows-mode.el"]
+	path = annoying-arrows-mode.el
+	url = https://github.com/magnars/annoying-arrows-mode.el.git
