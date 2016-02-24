@@ -1,3 +1,6 @@
 [submodule "site-lisp/hardcore-mode"]
 	path = site-lisp/hardcore-mode
 	url = https://github.com/magnars/hardcore-mode.el.git
+[submodule "site-lisp/sage-mode"]
+	path = site-lisp/sage-mode
+	url = https://github.com/aroig/sage-mode
