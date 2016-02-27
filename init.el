@@ -42,6 +42,27 @@
 ;; to enable some combination of features.  Using sage-view requires a
 ;; working LaTeX installation with the preview package.
 
+
+;; Automatic package installation
+(require 'package)
+;(add-to-list 'package-archives
+;         '("marmalade" . "http://marmalade-repo.org/packages/")
+;         '("melpa" . "http://melpa.milkbox.net/packages/"))
 (package-initialize)
-(package-install 'auctex)
+
+(defvar initial-packages '(auctex)
+  "A list of packages to be installed")
+
+(unless
+    (loop for p in initial-packages
+	  when (not (package-installed-p p)) do (return nil)
+	  finally (return t))
+  ;; check for new packages (package versions)
+  (message "%s" "Emacs Prelude is now refreshing its package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ;; install the missing packages
+  (dolist (p prelude-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
 
