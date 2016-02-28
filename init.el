@@ -52,6 +52,7 @@
   (dolist (p initial-packages)
     (when (not (package-installed-p p))
       (package-install p)))
+  (dolist (proc (process-list))
+	(kill-process proc))
   (restart-emacs))
-
 
