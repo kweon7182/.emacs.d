@@ -7,6 +7,3 @@
 [submodule "site-lisp/restart-emacs"]
 	path = site-lisp/restart-emacs
 	url = https://github.com/iqbalansari/restart-emacs
-[submodule "site/emacs-noflet"]
-	path = site-lisp/emacs-noflet
-	url = https://github.com/nicferrier/emacs-noflet
