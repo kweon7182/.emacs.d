@@ -1,21 +1,7 @@
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(cua-mode t nil (cua-base))
- '(inhibit-startup-screen t)
- '(TeX-source-correlate-method (quote synctex))
- '(TeX-source-correlate-mode t)
- '(TeX-source-correlate-start-server t)
- )
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; custom file
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file)
+
 (global-linum-mode 1)
 
 (global-set-key [f7] 'previous-error)
@@ -30,9 +16,9 @@
 (add-to-list 'load-path 
 	     (expand-file-name "~/.emacs.d/site-lisp/sage-mode/emacs"))
 (require 'sage "sage")
-(setq sage-command "/usr/local/bin/sage")
-(sage-update-autoloads)
-(kill-buffer "sage-load.el")
+(setq sage-command "sage")
+;(sage-update-autoloads)
+;(kill-buffer "sage-load.el")
 ;; If you want sage-view to typeset all your output and have plot()
 ;; commands inline, uncomment the following line and configure sage-view:
 ;; (require 'sage-view "sage-view")
@@ -43,32 +29,24 @@
 ;; to enable some combination of features.  Using sage-view requires a
 ;; working LaTeX installation with the preview package.
 
+(defvar log-file-path (locate-user-emacs-file "log.txt")
+  "The path of the log file.")
 
+(defun read-log-line (line-num)
+  "Return the string of (LINE-NUM)-th line of the log file."
+  (with-current-buffer (find-file-noselect log-file-path)
+    (goto-line line-num)
+    (let ((start (point)))
+      (end-of-line)
+      (let ((result (buffer-substring start (point))))
+	(kill-buffer (current-buffer))
+	result))))
 
-;; Automatic package installation
-(require 'package)
-;(add-to-list 'package-archives
-;         '("marmalade" . "http://marmalade-repo.org/packages/")
-;         '("melpa" . "http://melpa.milkbox.net/packages/"))
-(package-initialize)
+(defun write-log (str)
+  "Write str into the log file."
+  (with-temp-file log-file-path "")
+  (append-to-file str nil log-file-path))
 
-(defvar initial-packages '(auctex)
-  "A list of packages to be installed")
-
-(defvar is_first_run 
-  (loop for p in initial-packages
-	when (not (package-installed-p p)) do (return nil)
-	finally (return t)))
-
-(if is_first_run
-  ;; check for new packages (package versions)
-  (message "%s" "Emacs Prelude is now refreshing its package database...")
-  (package-refresh-contents)
-  (message "%s" " done.")
-  ;; install the missing packages
-  (dolist (p initial-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
 
 
 
@@ -89,17 +67,36 @@
 			 #'launch-separate-emacs-in-terminal)))))
     (save-buffers-kill-emacs)))
 
-(defvar log-file-name "log.txt")
 
-(defun read-log-line (line-num)
-  (with-current-buffer (find-file-noselect (locate-user-emacs-file log-file-name))
-    (goto-line line-num)
-    (let ((start (point)))
-      (end-of-line)
-      (let ((result (string-to-number (buffer-substring start (point)))))
-	(kill-buffer (current-buffer))
-	result))))
 
-(defvar run-count (read-log-line 1))
-(with-temp-file (locate-user-emacs-file log-file-name) (prin1 (+ run-count 1) (current-buffer)))
+
+
+
+
+
+;; Automatic package installation
+(require 'package)
+;(add-to-list 'package-archives
+;         '("marmalade" . "http://marmalade-repo.org/packages/")
+;         '("melpa" . "http://melpa.milkbox.net/packages/"))
+(package-initialize)
+
+(defvar initial-packages '(auctex)
+  "A list of packages to be installed")
+
+;(defvar is_first_run 
+;  (loop for p in initial-packages
+;     when (not (package-installed-p p)) do (return nil)
+;	finally (return t)))
+
+;(if is_first_run
+;  ;; check for new packages (package versions)
+;  (message "%s" "Emacs Prelude is now refreshing its package database...")
+;  (package-refresh-contents)
+;  (message "%s" " done.")
+;  ;; install the missing packages
+;  (dolist (p initial-packages)
+;    (when (not (package-installed-p p))
+;      (package-install p))))
+
 
