@@ -1,0 +1,55 @@
+#!/bin/sh
+
+CUR=`pwd`
+
+# Build and install Python support files
+cd src/
+python setup.py build
+
+if [ $? -ne 0 ]; then
+    echo "Failure to build sage-mode Python support files"
+    exit 1
+fi
+
+python setup.py install
+
+if [ $? -ne 0 ]; then
+    echo "Failure to install sage-mode Python support files"
+    exit 1
+fi
+
+# Copy emacs lisp to SAGE_DATA, and print helpful instructions
+cd "$CUR"
+if [ "x$SAGE_DATA" = x ]; then
+    INSTALL_DIR=$SAGE_LOCAL/share/emacs/site-lisp/sage-mode
+    # Create intermediate directories
+    mkdir -p $INSTALL_DIR
+else
+    INSTALL_DIR=$SAGE_DATA/emacs
+fi
+rm -rf $INSTALL_DIR
+cp -r emacs $INSTALL_DIR
+
+# Remove old elc files if any.
+# Then, even if byte compiling fails, they won't taint the setup.
+rm -f $INSTALL_DIR/*.elc
+
+# Byte compile -- this can fail since we don't require emacs for Sage
+EMACS=${EMACS-emacs}
+sage-native-execute $EMACS -batch 2> /dev/null > /dev/null
+if [ $? -ne 0 ]; then
+    echo
+    echo WARNING: Could not find emacs at "'$EMACS'"
+    echo "Set the EMACS environment variable or ignore this if you don't have emacs installed"
+
+else
+
+    echo Byte compiling sage-mode with "'$EMACS'"
+    echo Set the EMACS environment variable to compile with a different emacs.
+    sage-native-execute $EMACS -batch -L $INSTALL_DIR/ -f batch-byte-compile $INSTALL_DIR/*.el
+
+    # Extract and print the .emacs portion of SPKG.txt
+    export INSTALL_DIR
+    perl -ne 'if (/Start .emacs/../End .emacs/) { s/\$(\w+)/$ENV{$1}/; print; }' SPKG.txt
+
+fi
