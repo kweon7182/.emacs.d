@@ -61,10 +61,9 @@
   (dolist (p initial-packages)
     (when (not (package-installed-p p))
       (package-install p)))
-  (message "done."))
-
-(if is_first_run
+  (message "done.")
   (dolist (proc (process-list))
     (kill-process proc))
-  (restart-emacs))
+  (restart-emacs)
+  )
 
