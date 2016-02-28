@@ -1,17 +1,19 @@
 ;; Automatic package installation
 (require 'package)
+
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
 
-(defvar is_first_run 
+(defvar update-required    
   (loop for p in initial-packages
      when (not (package-installed-p p)) do (return nil)
-     finally (return t)))
+     finally (return t))
+  "True if and only if the update is required.")
 
-(if is_first_run
+(if update-required
   (message "Start refreshing packages.")
   (package-refresh-contents)
   

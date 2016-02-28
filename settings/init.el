@@ -4,8 +4,6 @@
 (setq c-default-style "linux" c-basic-offset 4)
 
 ;; for sage
-(add-to-list 'load-path 
-	     "/opt/sage/7.0/local/share/emacs/site-lisp/sage-mode")
 (require 'sage)
 (setq sage-command "sage")
 ;; If you want sage-view to typeset all your output and have plot()

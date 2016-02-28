@@ -11,22 +11,20 @@
 (setq settings-dir (locate-user-emacs-file "settings"))
 (add-to-list 'load-path settings-dir)
 
-
-;; global variables
-(defvar initial-packages
-  '(auctex magit)
-  "A list of packages to be installed")
-
-
 ;; from emacs
 (require 'cl)
 
 ;; from site-lisp
 (require 'restart-emacs)
 
+;; global variables
+(defvar initial-packages
+  '(auctex magit)
+  "A list of packages to be installed")
+
 ;; from settings
+(require 'init-packages)
 (require 'functions)
 (require 'init)
 (require 'key-bindings)
-(require 'init-packages)
 
