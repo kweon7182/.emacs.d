@@ -4,7 +4,6 @@
 
 (require 'cl)
 
-
 (global-linum-mode 1)
 
 (global-set-key [f7] 'previous-error)
@@ -15,10 +14,9 @@
 ;; for c-mode
 (setq c-default-style "linux" c-basic-offset 4)
 
- ;; for sage
-(add-to-list 'load-path
+;; for sage
+(add-to-list 'load-path 
 	     "/opt/sage/7.0/local/share/emacs/site-lisp/sage-mode")
-;; "~/.emacs.d/site-lisp/sage-mode/emacs")
 (require 'sage "sage")
 (setq sage-command "sage")
 ;(sage-update-autoloads)
@@ -54,14 +52,6 @@
 
 
 
-
-
-
-
-
-
-
-
 (defun launch-separate-emacs-in-terminal ()
   (suspend-emacs "fg ; emacs -nw"))
 
@@ -84,6 +74,8 @@
 
 
 
+
+
 ;; Automatic package installation
 (require 'package)
 ;(add-to-list 'package-archives
@@ -95,12 +87,16 @@
   "A list of packages to be installed")
 
 (defvar is_first_run 
-  (cl-loop for p in initial-packages
+  (loop for p in initial-packages
      when (not (package-installed-p p)) do (return nil)
 	finally (return t)))
 
 (if is_first_run
+  ;; check for new packages (package versions)
+  (message "%s" "Emacs Prelude is now refreshing its package database...")
   (package-refresh-contents)
+  (message "%s" " done.")
+  ;; install the missing packages
   (dolist (p initial-packages)
     (when (not (package-installed-p p))
       (package-install p))))
