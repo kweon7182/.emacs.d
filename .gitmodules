@@ -1,9 +1,12 @@
 [submodule "site-lisp/hardcore-mode"]
 	path = site-lisp/hardcore-mode
-	url = https://github.com/magnars/hardcore-mode.el.git
+	url = https://github.com/magnars/hardcore-mode.el
 [submodule "site-lisp/sage-mode"]
 	path = site-lisp/sage-mode
 	url = https://github.com/aroig/sage-mode
 [submodule "site-lisp/restart-emacs"]
 	path = site-lisp/restart-emacs
 	url = https://github.com/iqbalansari/restart-emacs
+[submodule "site/emacs-noflet"]
+	path = site-lisp/emacs-noflet
+	url = https://github.com/nicferrier/emacs-noflet

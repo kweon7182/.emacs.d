@@ -52,7 +52,7 @@
 (defvar is_first_run 
   (loop for p in initial-packages
      when (not (package-installed-p p)) do (return nil)
-	finally (return t)))
+     finally (return t)))
 
 (if is_first_run
   (message "Start refreshing packages.")
@@ -61,9 +61,6 @@
   (dolist (p initial-packages)
     (when (not (package-installed-p p))
       (package-install p)))
-  (message "done.")
-  (dolist (proc (process-list))
-    (kill-process proc))
-  (restart-emacs)
-  )
+  (bypass-confirmation #'restart-emacs))
+
 
