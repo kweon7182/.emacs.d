@@ -4,3 +4,6 @@
 [submodule "site-lisp/sage-mode"]
 	path = site-lisp/sage-mode
 	url = https://github.com/aroig/sage-mode
+[submodule "site-lisp/restart-emacs"]
+	path = site-lisp/restart-emacs
+	url = https://github.com/iqbalansari/restart-emacs

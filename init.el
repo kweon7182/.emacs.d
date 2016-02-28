@@ -2,6 +2,9 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file)
 
+(require 'cl)
+
+
 (global-linum-mode 1)
 
 (global-set-key [f7] 'previous-error)
@@ -12,9 +15,10 @@
 ;; for c-mode
 (setq c-default-style "linux" c-basic-offset 4)
 
-;; for sage
-(add-to-list 'load-path 
-	     (expand-file-name "~/.emacs.d/site-lisp/sage-mode/emacs"))
+ ;; for sage
+(add-to-list 'load-path
+	     "/opt/sage/7.0/local/share/emacs/site-lisp/sage-mode")
+;; "~/.emacs.d/site-lisp/sage-mode/emacs")
 (require 'sage "sage")
 (setq sage-command "sage")
 ;(sage-update-autoloads)
@@ -50,22 +54,10 @@
 
 
 
-(defun launch-separate-emacs-in-terminal ()
-  (suspend-emacs "fg ; emacs -nw"))
 
-(defun launch-separate-emacs-under-x ()
-  (call-process "sh" nil nil nil "-c" "emacs &"))
 
-(defun restart-emacs ()
-  (interactive)
-  ;; We need the new emacs to be spawned after all kill-emacs-hooks
-  ;; have been processed and there is nothing interesting left
-  (let ((kill-emacs-hook
-	 (append kill-emacs-hook
-		 (list (if (display-graphic-p)
-			   #'launch-separate-emacs-under-x
-			 #'launch-separate-emacs-in-terminal)))))
-    (save-buffers-kill-emacs)))
+
+
 
 
 
@@ -84,19 +76,15 @@
 (defvar initial-packages '(auctex)
   "A list of packages to be installed")
 
-;(defvar is_first_run 
-;  (loop for p in initial-packages
-;     when (not (package-installed-p p)) do (return nil)
-;	finally (return t)))
+(defvar is_first_run 
+  (loop for p in initial-packages
+     when (not (package-installed-p p)) do (return nil)
+	finally (return t)))
 
-;(if is_first_run
-;  ;; check for new packages (package versions)
-;  (message "%s" "Emacs Prelude is now refreshing its package database...")
-;  (package-refresh-contents)
-;  (message "%s" " done.")
-;  ;; install the missing packages
-;  (dolist (p initial-packages)
-;    (when (not (package-installed-p p))
-;      (package-install p))))
-
+(if is_first_run
+  (package-refresh-contents)
+  (dolist (p initial-packages)
+    (when (not (package-installed-p p))
+      (package-install p)))
+  )
 
