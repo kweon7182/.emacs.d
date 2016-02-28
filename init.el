@@ -11,11 +11,6 @@
 (setq settings-dir (locate-user-emacs-file "settings"))
 (add-to-list 'load-path settings-dir)
 
-;; theme files
-(setq theme-dir (locate-user-emacs-file "theme"))
-(add-to-list 'custom-theme-load-path theme-dir)
-(load-theme 'light)
-
 
 ;; from emacs
 (require 'cl)
@@ -25,7 +20,7 @@
 
 ;; global variables
 (defvar initial-packages
-  '(auctex magit)
+  '(auctex magit organic-green-theme)
   "A list of packages to be installed")
 
 ;; from settings
@@ -33,4 +28,8 @@
 (require 'functions)
 (require 'setup)
 (require 'key-bindings)
+
+
+;; load theme
+(load-theme 'organic-green)
 
