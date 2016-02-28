@@ -7,6 +7,3 @@
 [submodule "site-lisp/emacs-noflet"]
 	path = site-lisp/emacs-noflet
 	url = https://github.com/nicferrier/emacs-noflet
-[submodule "site-lisp/sage-mode"]
-	path = site-lisp/sage-mode
-	url = ./site-lisp/sage-mode
