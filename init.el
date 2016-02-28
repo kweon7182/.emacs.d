@@ -37,7 +37,7 @@
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 (package-initialize)
 
-(defvar initial-packages '(auctex magit)
+(defvar initial-packages '(magit)
   "A list of packages to be installed")
 
 (defvar is_first_run 
@@ -52,7 +52,6 @@
   (dolist (p initial-packages)
     (when (not (package-installed-p p))
       (package-install p)))
-  (dolist (proc (process-list))
-	(kill-process proc))
+  (kill-process "*emacs*")
   (restart-emacs))
 
