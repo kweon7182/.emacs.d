@@ -1,3 +1,4 @@
+(toggle-frame-maximized)
 (global-linum-mode 1)
 
 ;; for c-mode
@@ -10,4 +11,4 @@
     (sage-update-autoloads))
 
 
-(provide 'init)
+(provide 'setup)

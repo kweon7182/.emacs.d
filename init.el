@@ -23,8 +23,8 @@
   "A list of packages to be installed")
 
 ;; from settings
-(require 'init-packages)
+(require 'setup-packages)
 (require 'functions)
-(require 'init)
+(require 'setup)
 (require 'key-bindings)
 
