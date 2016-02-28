@@ -92,8 +92,9 @@
 	finally (return t)))
 
 (if is_first_run
+  (message "Start refreshing packages.")
   (package-refresh-contents)
-  (message "%s" " done.")
+  (message "done.")
   ;; install the missing packages
   (dolist (p initial-packages)
     (when (not (package-installed-p p))
