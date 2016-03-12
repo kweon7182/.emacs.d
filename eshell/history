@@ -1,0 +1,7 @@
+cd ~
+ls
+rm init.el 
+cd .emacs.d/
+ls
+git add .
+git commit -m "TeX setting for Windows"
