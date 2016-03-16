@@ -35,8 +35,9 @@
 (require 'functions)
 (require 'setup)
 (require 'key-bindings)
-(provide 'windows)
+(require 'windows)
 
 ;; load theme
 (load-theme 'organic-green)
+
 
