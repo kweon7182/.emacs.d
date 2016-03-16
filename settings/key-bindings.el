@@ -3,3 +3,4 @@
 (global-set-key [f9] (lambda() (interactive) (compile "make -k")))
 
 (provide 'key-bindings)
+

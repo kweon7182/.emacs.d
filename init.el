@@ -1,4 +1,11 @@
 ;; custom file
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file)
 
@@ -28,19 +35,8 @@
 (require 'functions)
 (require 'setup)
 (require 'key-bindings)
+(provide 'windows)
 
 ;; load theme
 (load-theme 'organic-green)
 
-;; for windows
-(when (eq system-type 'windows-nt)
-  ;;(setq sumatra-path "\"C:/Program Files/SumatraPDF/SumatraPDF.exe\" -reuse-instance")
-  (setq TeX-view-program-list
-	'(("Sumatra PDF" ("\"C:/Program Files/SumatraPDF/SumatraPDF.exe\" -reuse-instance"
-			  (mode-io-correlate " -forward-search %b %n -inverse-search \"C:/Program Files/emacs-24.5/bin/emacsclientw --no-wait +%%l \\\"%%f\\\"\" ") " %o")))))
-
-
-(with-eval-after-load 'tex
-  (when (eq system-type 'windows-nt)
-    (assq-delete-all 'output-pdf TeX-view-program-selection)
-    (add-to-list 'TeX-view-program-selection '(output-pdf "Sumatra PDF"))))
