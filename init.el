@@ -38,6 +38,6 @@
 (require 'windows)
 
 ;; load theme
-(load-theme 'organic-green)
+;(load-theme 'organic-green)
 
 
