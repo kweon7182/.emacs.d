@@ -8,9 +8,6 @@
 (add-to-list 'package-archives
 	     '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
-;; Initialize
-(package-initialize)
-
 ;; Check whether update is required
 (defvar update-required    
   (loop for p in initial-packages
