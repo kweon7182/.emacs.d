@@ -18,6 +18,7 @@
 (setq settings-dir (locate-user-emacs-file "settings"))
 (add-to-list 'load-path settings-dir)
 
+(setenv "PATH" "/usr/local/bin:/Library/TeX/texbin/:$PATH" t)
 
 ;; from emacs
 (require 'cl)
@@ -27,7 +28,7 @@
 
 ;; global variables
 (defvar initial-packages
-  '(auctex magit organic-green-theme)
+  '(auctex magit organic-green-theme exec-path-from-shell)
   "A list of packages to be installed")
 
 ;; from settings
@@ -36,6 +37,7 @@
 (require 'setup)
 (require 'key-bindings)
 (require 'windows)
+(require 'darwin)
 
 ;; load theme
 ;(load-theme 'organic-green)
