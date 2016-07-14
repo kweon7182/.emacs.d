@@ -8,6 +8,10 @@
 (add-to-list 'auto-mode-alist '("\\.cu$" . c++-mode))
 
 
+;; for python
+(add-hook 'python-mode-hook '(lambda () 
+			       (setq python-indent 4)))
+
 ;; for sage
 (require 'sage)
 (setq sage-command "sage")
