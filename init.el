@@ -42,4 +42,9 @@
 ;; load theme
 ;(load-theme 'organic-green)
 
+(set-language-environment "Korean")
+(prefer-coding-system 'utf-8)
+(global-set-key (kbd "<S-kana>") 'toggle-input-method)
+(global-set-key (kbd "<kana>") 'toggle-input-method)
+(setq default-korean-keyboard "korean-hangul3f")
 

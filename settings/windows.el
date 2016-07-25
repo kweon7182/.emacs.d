@@ -10,6 +10,5 @@
     (assq-delete-all 'output-pdf TeX-view-program-selection)
     (add-to-list 'TeX-view-program-selection '(output-pdf "Sumatra PDF"))))
 
-
 (provide 'windows)
 
