@@ -1,7 +1,17 @@
-/auto-save-list
-/site_lisp
-/elpa
-/eshell
+# Locally installed packages and Emacs runtime files
+/elpa/
+/auto-save-list/
+/eshell/
+/server/
 /log.txt
+
+# Backups, auto-save files, lock files, and compiled Lisp
 *~
-*#
+\#*#
+.#*
+*.elc
+*.eln
+
+# Local preservation copies and vendored Mercurial metadata
+/.local-backups/
+**/.hg/
