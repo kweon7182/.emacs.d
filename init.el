@@ -43,8 +43,12 @@
 ;(load-theme 'organic-green)
 
 (set-language-environment "Korean")
+(setq inhibit-compacting-font-caches t)
 (prefer-coding-system 'utf-8)
 (global-set-key (kbd "<S-kana>") 'toggle-input-method)
 (global-set-key (kbd "<kana>") 'toggle-input-method)
 (setq default-korean-keyboard "3f")
+
+(put 'downcase-region 'disabled nil)
+(setq ring-bell-function 'ignore)
 

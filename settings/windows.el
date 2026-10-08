@@ -3,7 +3,7 @@
   ;;(setq sumatra-path "\"C:/Program Files/SumatraPDF/SumatraPDF.exe\" -reuse-instance")
   (setq TeX-view-program-list
 	'(("Sumatra PDF" ("\"C:/Program Files/SumatraPDF/SumatraPDF.exe\" -reuse-instance"
-			  (mode-io-correlate " -forward-search %b %n -inverse-search \"C:/Program Files/emacs-24.5/bin/emacsclientw --no-wait +%%l \\\"%%f\\\"\" ") " %o")))))
+			  (mode-io-correlate " -forward-search %b %n -inverse-search \"C:/Program Files/emacs-26.3/bin/emacsclientw --no-wait +%%l \\\"%%f\\\"\" ") " %o")))))
 
 (with-eval-after-load 'tex
   (when (eq system-type 'windows-nt)
